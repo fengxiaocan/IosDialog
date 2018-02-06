@@ -101,8 +101,8 @@ public class InputDialog{
         window = dialog.getWindow();
         lp = window.getAttributes();
         window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-        setLeftButton("取消",new DialogCancelListener());
-        setRightButton("确定",new IDialogListener(){
+        setLeftButton(R.string.cancel,new DialogCancelListener());
+        setRightButton(R.string.sure,new IDialogListener(){
             @Override
             public void onClick(DialogInterface dialog){
                 dialog.dismiss();
@@ -588,6 +588,7 @@ public class InputDialog{
     }
 
 
+
     /**
      * 设置左边按钮
      *
@@ -599,12 +600,6 @@ public class InputDialog{
     public InputDialog setLeftButton(String text){
         showLeftBtn = true;
         btn_left.setText(Html.fromHtml(text));
-        btn_left.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                dialog.dismiss();
-            }
-        });
         return this;
     }
 
@@ -1002,12 +997,6 @@ public class InputDialog{
     public InputDialog setRightButton(String text){
         showRightBtn = true;
         btn_right.setText(Html.fromHtml(text));
-        btn_right.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                dialog.dismiss();
-            }
-        });
         return this;
     }
 
