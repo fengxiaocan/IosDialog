@@ -1,11 +1,11 @@
 package com.evil.iosdialog;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.evil.ioslibs.DialogCancelListener;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.evil.ioslibs.InputDialog;
 import com.evil.ioslibs.InputResultListener;
 import com.evil.ioslibs.IosDialog;
@@ -106,14 +106,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 }).show();
                 break;
             case R.id.bt_exit:
-                new IosDialog(this).setTitle("退出提示").setMessage("是否确认退出").setLeftButton("确定",
-                        new DialogCancelListener()).setRightButton("取消", new DialogCancelListener
-                        ()).show();
+                new IosDialog(this)
+                        .setTitle("退出提示")
+                        .setMessage("是否确认退出")
+                        .setLeftButton("确定", null)
+                        .setRightButton("取消", null)
+                        .show();
                 break;
             case R.id.bt_tip:
-                new IosDialog(this).setTitle("提示").setMessage("异常登录").setMiddleButton("知道了",
-                        new DialogCancelListener
-                                ()).show();
+                new IosDialog(this)
+                        .setTitle("提示")
+
+                        .setMiddleButton("知道了", null)
+                        .show();
                 break;
             case R.id.bt_input:
                 new InputDialog(this).setTitle("输入").setInputHint("请输入密码")

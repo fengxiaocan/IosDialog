@@ -5,7 +5,7 @@ public enum SheetItemColor {
 
     private String name;
 
-    private SheetItemColor(String name) {
+    SheetItemColor(String name) {
         this.name = name;
     }
 

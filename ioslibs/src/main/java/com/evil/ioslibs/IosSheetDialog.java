@@ -13,16 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+
+import com.app.lifedata.LifecycleData;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Author: liuqiang
- * Time: 2018-01-02 13:28
- * Description:
- */
-public class IosSheetDialog {
-    private Context context;
+public class IosSheetDialog implements LifecycleData {
+    private final Context context;
+    private final Display display;
     private Dialog dialog;
     private TextView txt_title;
     private TextView txt_cancel;
@@ -30,7 +32,6 @@ public class IosSheetDialog {
     private ScrollView sLayout_content;
     private boolean showTitle = false;
     private List<SheetItem> sheetItemList;
-    private Display display;
 
     public IosSheetDialog(Context context) {
         this.context = context;
@@ -91,16 +92,13 @@ public class IosSheetDialog {
     }
 
     /**
-     *
-     * @param strItem
-     *            条目名称
-     * @param color
-     *            条目字体颜色，设置null则默认蓝色
+     * @param strItem  条目名称
+     * @param color    条目字体颜色，设置null则默认蓝色
      * @param listener
      * @return
      */
     public IosSheetDialog addSheetItem(String strItem, SheetItemColor color,
-                                          OnSheetItemClickListener listener) {
+                                       OnSheetItemClickListener listener) {
         if (sheetItemList == null) {
             sheetItemList = new ArrayList<SheetItem>();
         }
@@ -108,7 +106,9 @@ public class IosSheetDialog {
         return this;
     }
 
-    /** 设置条目布局 */
+    /**
+     * 设置条目布局
+     */
     private void setSheetItems() {
         if (sheetItemList == null || sheetItemList.size() <= 0) {
             return;
@@ -165,8 +165,7 @@ public class IosSheetDialog {
 
             // 字体颜色
             if (color == null) {
-                textView.setTextColor(Color.parseColor(SheetItemColor.Blue
-                        .getName()));
+                textView.setTextColor(Color.parseColor(SheetItemColor.Blue.getName()));
             } else {
                 textView.setTextColor(Color.parseColor(color.getName()));
             }
@@ -190,8 +189,23 @@ public class IosSheetDialog {
         }
     }
 
+
     public void show() {
         setSheetItems();
         dialog.show();
+    }
+
+    public void dismiss() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onDetach() {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
+
     }
 }

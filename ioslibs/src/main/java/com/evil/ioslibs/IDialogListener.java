@@ -10,7 +10,6 @@ import android.content.DialogInterface;
  * @version: 1.1
  * @desc： TODO
  */
-
 public interface IDialogListener{
      void onClick(DialogInterface dialog);
 }
